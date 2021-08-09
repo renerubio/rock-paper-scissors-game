@@ -1,5 +1,27 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import './RPS_Game.scss';
+
+const ButtonsList = ({ textButton, handleClick, option }) => {
+  const [hovered, setHovered] = useState(false);
+  const toggleHover = () => setHovered(!hovered);
+  const buttonClass = () => ('button ' + (hovered ? 'is-link' : 'is-primary'));
+  return (
+
+    <div className="column is-one-fifth">
+      <button
+        className={buttonClass()}
+        key={option}
+        type="button"
+        onClick={handleClick}
+        onMouseEnter={toggleHover}
+        onMouseLeave={toggleHover}>
+        {textButton}
+      </button>
+    </div >
+  )
+};
+
 
 const RPS_Game = () => {
   const [userValue, updateUserValue] = useState(null);
@@ -56,19 +78,24 @@ const RPS_Game = () => {
   }
 
   return (
-    <div className="App">
-      <h2>Select your option</h2>
-      <button key={0} type="button" onClick={handleButtonClick(0)}>
-        {txtGame.options[0]}
-      </button>
-      <button key={1} type="button" onClick={handleButtonClick(1)}>
-        {txtGame.options[1]}
-      </button>
-      <button key={2} type="button" onClick={handleButtonClick(2)}>
-        {txtGame.options[2]}
-      </button>
+    <div className="section has-background-white-ter">
+      <h2 className="title">Select your option</h2>
+      <div className="columns">
+        {
+          Object.keys(VALUES_GAME).map((key) => {
+            return (
+              <ButtonsList key={VALUES_GAME[key]}
+                textButton={txtGame.options[VALUES_GAME[key]]}
+                handleClick={handleButtonClick(VALUES_GAME[key])}
+                option={VALUES_GAME[key]} />
+            )
+          })
+        }
+      </div>
+
       {userValue !== null && (
         <div>
+          <h3 className="title">Result</h3>
           {getResultMessage()}
         </div>
       )}
