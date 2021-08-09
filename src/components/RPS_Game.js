@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './RPS_Game.scss';
 
 const RPS_Game = () => {
-  const [selectedValue, setSelectedValue] = useState(null);
-  const [pcSelectedValue, setPcSelectedValue] = useState(null);
+  const [userValue, updateUserValue] = useState(null);
+  const [pcValue, updatePcValue] = useState(null);
 
   const VALUES_GAME = {
     ROCK: 0,
@@ -23,8 +23,8 @@ const RPS_Game = () => {
   const getResultMessage = () => {
 
     const txtGameMoves = {
-      userMove: `Your chose: ${txtGame.options[selectedValue]}`,
-      pcMove: `PC move: ${txtGame.options[pcSelectedValue]}`,
+      userMove: `Your chose: ${txtGame.options[userValue]}`,
+      pcMove: `PC move: ${txtGame.options[pcValue]}`,
     };
 
     const resultMessage = (winner) => {
@@ -38,33 +38,21 @@ const RPS_Game = () => {
     const userWin = () => (resultMessage(txtGame.userWin));
     const userLost = () => (resultMessage(txtGame.userLost));
 
-    if (selectedValue === pcSelectedValue) return resultMessage(txtGame.draw)
+    const getWinner = (userMove, pcMove) => {
+      if (userMove === pcMove) return resultMessage(txtGame.draw);
+      return {
+        0: pcMove === VALUES_GAME.SCISSORS ? userWin() : userLost(),
+        1: pcMove === VALUES_GAME.ROCK ? userWin() : userLost(),
+        2: pcMove === VALUES_GAME.PAPER ? userWin() : userLost(),
+      }[userMove]
+    };
 
-    if (selectedValue === VALUES_GAME.ROCK) {
-      if (pcSelectedValue === VALUES_GAME.PAPER)
-        return userLost()
-      if (pcSelectedValue === VALUES_GAME.SCISSORS)
-        return userWin()
-    }
-
-    if (selectedValue === VALUES_GAME.PAPER) {
-      if (pcSelectedValue === VALUES_GAME.ROCK)
-        return userWin()
-      if (pcSelectedValue === VALUES_GAME.SCISSORS)
-        return userLost()
-    }
-
-    if (selectedValue === VALUES_GAME.SCISSORS) {
-      if (pcSelectedValue === VALUES_GAME.ROCK)
-        return userLost()
-      if (pcSelectedValue === VALUES_GAME.PAPER)
-        return userWin()
-    }
+    return getWinner(userValue, pcValue);
   };
 
   const handleButtonClick = value => () => {
-    setSelectedValue(value);
-    setPcSelectedValue(pcMove);
+    updateUserValue(value);
+    updatePcValue(pcMove);
   }
 
   return (
@@ -79,7 +67,7 @@ const RPS_Game = () => {
       <button key={2} type="button" onClick={handleButtonClick(2)}>
         {txtGame.options[2]}
       </button>
-      {selectedValue !== null && (
+      {userValue !== null && (
         <div>
           {getResultMessage()}
         </div>
