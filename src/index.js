@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RPS_Game from './components/RPS_Game';
+import RPS_Game from './components';
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
 

@@ -1,4 +1,4 @@
-export const txtGame = {
+const txtGame = {
   title: 'Select your option',
   subtitle: 'Result',
   userWin: 'You win! 😎 ',
@@ -6,3 +6,4 @@ export const txtGame = {
   draw: 'Draw 🤝 ',
   options: ['Rock 🗿', 'Paper 📰', 'Scissors ✂️'],
 }
+export default txtGame;

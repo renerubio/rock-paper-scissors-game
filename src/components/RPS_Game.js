@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { txtGame } from '../helpers/texts';
+import txtGame from '../helpers';
 import './RPS_Game.scss';
 
 const CustomButton = ({ textButton, handleClick, option }) => {
