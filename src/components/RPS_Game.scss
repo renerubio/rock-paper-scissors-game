@@ -1,6 +1,11 @@
+@import './../../node_modules/bulma/sass/utilities/mixins.sass';
+
 .section {
   &.custom-section {
-    width: 50%;
+    @include desktop {
+      padding: 0 20%;
+    }
+
     min-height: 100vh;
     height: 100%;
     margin: 0 auto;

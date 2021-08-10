@@ -1,26 +1,7 @@
 import React, { useState } from 'react';
 import txtGame from '../helpers';
+import CustomButton from './CustomButton';
 import './RPS_Game.scss';
-
-const CustomButton = ({ textButton, handleClick, option }) => {
-  const [hovered, setHovered] = useState(false);
-  const toggleHover = () => setHovered(!hovered);
-  const buttonClass = () => ('button ' + (hovered ? 'is-link' : 'is-primary'));
-  return (
-
-    <div className="column is-one-fifth ">
-      <button
-        className={buttonClass()}
-        key={option}
-        type="button"
-        onClick={handleClick}
-        onMouseEnter={toggleHover}
-        onMouseLeave={toggleHover}>
-        {textButton}
-      </button>
-    </div >
-  )
-};
 
 const RPS_Game = () => {
   const [userValue, updateUserValue] = useState(null);
