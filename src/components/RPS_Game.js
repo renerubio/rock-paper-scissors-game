@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { txtGame } from '../helpers/texts';
 import './RPS_Game.scss';
