@@ -1,3 +1,8 @@
 .section {
-  width: 50%;
+  &.custom-section {
+    width: 50%;
+    min-height: 100vh;
+    height: 100%;
+    margin: 0 auto;
+  }
 }
